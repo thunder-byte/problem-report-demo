@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f5f7f4">
+    <meta name="description" content="Preview a mobile problem report with a photo and preferred contact method.">
+    <title>Problem Report — Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <div class="brand-mark" aria-hidden="true">P</div>
+        <div>
+          <p class="eyebrow">A clearer way to ask for help</p>
+          <h1>Report a problem</h1>
+        </div>
+      </header>
+
+      <p class="intro">Add a photo and a few details to preview how reporting a problem will work.</p>
+
+      <aside class="demo-notice" aria-label="Demo limitations">
+        <strong>Public demo</strong>
+        <span>This is a preview only. It does not connect accounts, upload photos, or send email or text messages.</span>
+      </aside>
+
+      <form id="report-form">
+        <section class="form-card" aria-labelledby="photo-heading">
+          <div class="section-heading">
+            <span class="step-number">1</span>
+            <div>
+              <h2 id="photo-heading">Show us the problem</h2>
+              <p>A clear photo helps explain what’s going on.</p>
+            </div>
+          </div>
+          <label class="photo-picker" for="photo">
+            <img id="photo-preview" alt="Preview of the selected problem photo" hidden>
+            <span id="photo-prompt" class="photo-prompt">
+              <span class="camera-icon" aria-hidden="true">+</span>
+              <strong>Take a photo or choose one</strong>
+              <span>Your photo stays in this browser preview</span>
+            </span>
+          </label>
+          <input id="photo" name="photo" type="file" accept="image/*" capture="environment" required>
+          <button class="text-button" id="remove-photo" type="button" hidden>Remove photo</button>
+        </section>
+
+        <section class="form-card" aria-labelledby="details-heading">
+          <div class="section-heading">
+            <span class="step-number">2</span>
+            <div>
+              <h2 id="details-heading">Describe what happened</h2>
+              <p>Include where it is and anything important to know.</p>
+            </div>
+          </div>
+          <label class="field-label" for="description">Problem description</label>
+          <textarea id="description" name="description" rows="4" maxlength="1000" placeholder="Tell us what you noticed…" required></textarea>
+          <div class="character-count"><span id="description-count">0</span>/1000</div>
+        </section>
+
+        <section class="form-card" aria-labelledby="contact-heading">
+          <div class="section-heading">
+            <span class="step-number">3</span>
+            <div>
+              <h2 id="contact-heading">Choose how to share</h2>
+              <p>Preview the email or text option. This demo will not send it.</p>
+            </div>
+          </div>
+          <fieldset class="contact-options">
+            <legend class="field-label">Preferred contact method</legend>
+            <label class="contact-option">
+              <input type="radio" name="contact-method" value="email" checked>
+              <span class="option-icon" aria-hidden="true">✉</span>
+              <span><strong>Email</strong><small>Send from your email</small></span>
+            </label>
+            <label class="contact-option">
+              <input type="radio" name="contact-method" value="sms">
+              <span class="option-icon" aria-hidden="true">▤</span>
+              <span><strong>Text message</strong><small>Share from your phone</small></span>
+            </label>
+          </fieldset>
+          <label class="field-label" for="recipient" id="recipient-label">Email address</label>
+          <input id="recipient" name="recipient" type="email" autocomplete="email" placeholder="name@example.com" required>
+          <p class="privacy-note">Nothing is sent from this public demo. Your selected photo is only previewed in this browser.</p>
+        </section>
+
+        <button class="submit-button" type="submit">
+          <span>Preview report</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <footer>Public demo · No report is sent</footer>
+    </main>
+    <script src="demo.js" defer></script>
+  </body>
+</html>
