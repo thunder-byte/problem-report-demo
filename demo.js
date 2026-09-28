@@ -5,19 +5,15 @@ const photoPrompt = document.querySelector("#photo-prompt");
 const removePhotoButton = document.querySelector("#remove-photo");
 const descriptionInput = document.querySelector("#description");
 const descriptionCount = document.querySelector("#description-count");
-const recipientInput = document.querySelector("#recipient");
-const recipientLabel = document.querySelector("#recipient-label");
 const statusMessage = document.querySelector("#status-message");
+const submitButton = form.querySelector('button[type="submit"]');
 
 let previewUrl = null;
 
 function updateContactField() {
   const isEmail = form.querySelector('input[name="contact-method"]:checked').value === "email";
-  recipientLabel.textContent = isEmail ? "Email address" : "Phone number";
-  recipientInput.type = isEmail ? "email" : "tel";
-  recipientInput.autocomplete = isEmail ? "email" : "tel";
-  recipientInput.placeholder = isEmail ? "name@example.com" : "+1 555 123 4567";
-  recipientInput.value = "";
+  const methodLabel = isEmail ? "email" : "text message";
+  submitButton.querySelector("span").textContent = `Share by ${methodLabel}`;
 }
 
 function clearPhoto() {
@@ -32,13 +28,30 @@ function clearPhoto() {
   }
 }
 
+function createMessage(description, method) {
+  return [
+    "Problem report",
+    `Preferred contact method: ${method === "email" ? "Email" : "Text message"}`,
+    "",
+    "Description:",
+    description,
+  ].join("\n");
+}
+
 photoInput.addEventListener("change", () => {
   const file = photoInput.files[0];
   if (!file) {
     return;
   }
-  if (!file.type.startsWith("image/")) {
+  const validImage = file.type.startsWith("image/")
+    || /\.(avif|gif|heic|heif|jpe?g|png|webp)$/i.test(file.name);
+  if (!validImage) {
     statusMessage.textContent = "Choose an image file to preview.";
+    clearPhoto();
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    statusMessage.textContent = "Choose a photo that is 10 MB or smaller.";
     clearPhoto();
     return;
   }
@@ -66,9 +79,40 @@ form.addEventListener("submit", (event) => {
   if (!form.reportValidity()) {
     return;
   }
+  const file = photoInput.files[0];
+  if (!file) {
+    statusMessage.textContent = "Choose a photo before sharing your report.";
+    return;
+  }
   const method = form.querySelector('input[name="contact-method"]:checked').value;
-  const contactType = method === "email" ? "Email address" : "Phone number";
-  statusMessage.textContent = `Demo preview ready for ${contactType} ${recipientInput.value.trim()}. No report was sent and no photo was uploaded.`;
+  if (!navigator.share || !navigator.canShare) {
+    statusMessage.textContent = "This browser cannot share a photo directly. Open this page on a supported phone browser. No file was downloaded.";
+    return;
+  }
+
+  const shareData = {
+    title: "Problem report",
+    text: createMessage(descriptionInput.value.trim(), method),
+    files: [file],
+  };
+  if (!navigator.canShare(shareData)) {
+    statusMessage.textContent = "This browser cannot share this photo directly. Try a supported phone browser. No file was downloaded.";
+    return;
+  }
+
+  submitButton.disabled = true;
+  navigator.share(shareData)
+    .then(() => {
+      statusMessage.textContent = "Share sheet opened. Choose your email or messaging app and recipient, then confirm sending.";
+    })
+    .catch((error) => {
+      statusMessage.textContent = error.name === "AbortError"
+        ? "Sharing was cancelled; nothing was sent."
+        : "The share sheet could not be opened. No file was downloaded.";
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+    });
 });
 
 updateContactField();

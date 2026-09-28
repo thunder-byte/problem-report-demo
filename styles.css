@@ -220,8 +220,7 @@ h1 {
   font-weight: 700;
 }
 
-textarea,
-#recipient {
+textarea {
   width: 100%;
   border: 1px solid #dce5df;
   border-radius: 12px;
@@ -237,19 +236,12 @@ textarea {
   resize: vertical;
 }
 
-#recipient {
-  min-height: 48px;
-  padding: 0 13px;
-}
-
-textarea:focus,
-#recipient:focus {
+textarea:focus {
   border-color: var(--green);
   box-shadow: 0 0 0 3px rgba(23, 102, 79, .11);
 }
 
-textarea::placeholder,
-#recipient::placeholder {
+textarea::placeholder {
   color: #9aa7a1;
 }
 

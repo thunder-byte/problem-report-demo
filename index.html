@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#f5f7f4">
-    <meta name="description" content="Preview a mobile problem report with a photo and preferred contact method.">
-    <title>Problem Report — Demo</title>
+    <meta name="description" content="Share a photo and description of a problem using your phone's email or messaging app.">
+    <title>Problem Report</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
   </head>
@@ -19,11 +19,11 @@
         </div>
       </header>
 
-      <p class="intro">Add a photo and a few details to preview how reporting a problem will work.</p>
+      <p class="intro">Add a photo and a few details, then share your report using your preferred email or messaging app.</p>
 
-      <aside class="demo-notice" aria-label="Demo limitations">
-        <strong>Public demo</strong>
-        <span>This is a preview only. It does not connect accounts, upload photos, or send email or text messages.</span>
+      <aside class="demo-notice" aria-label="Sharing information">
+        <strong>Share securely from your device</strong>
+        <span>Your photo and description are passed to your device’s share sheet. Choose an email or messaging app and recipient, then confirm sending. This site does not upload or store the report.</span>
       </aside>
 
       <form id="report-form">
@@ -40,7 +40,7 @@
             <span id="photo-prompt" class="photo-prompt">
               <span class="camera-icon" aria-hidden="true">+</span>
               <strong>Take a photo or choose one</strong>
-              <span>Your photo stays in this browser preview</span>
+              <span>JPG, PNG, or HEIC · no download required</span>
             </span>
           </label>
           <input id="photo" name="photo" type="file" accept="image/*" capture="environment" required>
@@ -65,7 +65,7 @@
             <span class="step-number">3</span>
             <div>
               <h2 id="contact-heading">Choose how to share</h2>
-              <p>Preview the email or text option. This demo will not send it.</p>
+              <p>Choose a preferred type of contact; your phone opens the share options.</p>
             </div>
           </div>
           <fieldset class="contact-options">
@@ -73,27 +73,25 @@
             <label class="contact-option">
               <input type="radio" name="contact-method" value="email" checked>
               <span class="option-icon" aria-hidden="true">✉</span>
-              <span><strong>Email</strong><small>Send from your email</small></span>
+              <span><strong>Email</strong><small>Use your mail app</small></span>
             </label>
             <label class="contact-option">
               <input type="radio" name="contact-method" value="sms">
               <span class="option-icon" aria-hidden="true">▤</span>
-              <span><strong>Text message</strong><small>Share from your phone</small></span>
+              <span><strong>Text message</strong><small>Use your messaging app</small></span>
             </label>
           </fieldset>
-          <label class="field-label" for="recipient" id="recipient-label">Email address</label>
-          <input id="recipient" name="recipient" type="email" autocomplete="email" placeholder="name@example.com" required>
-          <p class="privacy-note">Nothing is sent from this public demo. Your selected photo is only previewed in this browser.</p>
+          <p class="privacy-note">The share sheet lets you select the app and recipient. Review the message and photo there before sending.</p>
         </section>
 
         <button class="submit-button" type="submit">
-          <span>Preview report</span>
+          <span>Share report</span>
           <span aria-hidden="true">→</span>
         </button>
         <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
       </form>
 
-      <footer>Public demo · No report is sent</footer>
+      <footer>Your report is shared only after you confirm in your chosen app.</footer>
     </main>
     <script src="demo.js" defer></script>
   </body>
