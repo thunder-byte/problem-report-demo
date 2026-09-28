@@ -109,6 +109,147 @@ h1 {
   box-shadow: 0 8px 24px rgba(25, 58, 44, .045);
 }
 
+.auth-card {
+  margin-bottom: 20px;
+}
+
+.auth-card > .section-heading {
+  margin-bottom: 14px;
+}
+
+.auth-card .section-heading h2 {
+  margin: 0 0 5px;
+}
+
+.auth-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-bottom: 17px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #f0f4f1;
+}
+
+.auth-method {
+  min-height: 40px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #53645c;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.auth-method.active {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(25, 58, 44, .1);
+  color: var(--green);
+}
+
+.auth-card input {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-bottom: 14px;
+  padding: 0 12px;
+  border: 1px solid #dce5df;
+  border-radius: 11px;
+  outline: none;
+  background: #fff;
+  color: #1c302b;
+  font-size: 15px;
+}
+
+.auth-card input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(23, 102, 79, .11);
+}
+
+.auth-submit {
+  justify-content: center;
+  margin-top: 7px;
+}
+
+.auth-submit:disabled,
+.secondary-button:disabled,
+.auth-link:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
+.auth-link-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 13px;
+}
+
+.auth-link,
+.secondary-button {
+  padding: 7px 0;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.resend-code {
+  margin-top: 10px;
+}
+
+.signed-in-label {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.signed-in-identity {
+  overflow-wrap: anywhere;
+}
+
+#auth-signed-in .secondary-button {
+  display: block;
+  margin-top: 8px;
+  color: #a33e38;
+}
+
+.auth-panel {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-panel > a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--green);
+  font-weight: 650;
+}
+
+.verification-note {
+  margin: 12px 0 2px;
+  color: #8b5b20;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#email-verification-required .auth-link {
+  display: block;
+}
+
+#recaptcha-container {
+  position: absolute;
+}
+
+.status-message.error {
+  background: #fff1ef;
+  color: #a33e38;
+}
+
 .section-heading {
   display: flex;
   align-items: flex-start;
