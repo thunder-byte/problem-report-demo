@@ -17,4 +17,10 @@ The demo is published at [https://thunder-byte.github.io/problem-report-demo/](h
 5. Commit and push the updated config to `main`, then wait for the Pages deployment to finish.
 6. In Firebase Authentication phone settings, configure SMS regions and abuse protections for the countries you plan to support. Test phone login on the deployed HTTPS site; Firebase uses reCAPTCHA to protect SMS sign-in.
 
+The Firebase CLI is optional for this app's Console-based setup. To install it for Firebase command-line workflows, run:
+
+```sh
+npm install -g firebase-tools
+```
+
 Email and phone sign-ins create/use their own Firebase authentication identities; they are not automatically linked together. Email account creation sends a verification message, and email users must verify before using the report form. Firebase keeps the sign-in session on the device until the user signs out or clears browser data. The report photo is only passed to the chosen device share sheet after sign-in and is not uploaded by this site.
